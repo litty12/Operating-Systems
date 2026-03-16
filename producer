@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define size 5 
+
+int buffer[size];
+int in = 0;
+int out = 0;
+int count = 0;
+
+void display() {
+    if (count == 0) {
+        printf("\n>> Buffer is currently empty.\n");
+        return;
+    }
+
+    printf("\n Current Buffer: [ ");
+    for (int i = 0; i < count; i++) {
+        
+        int index = (out + i) % size;
+        printf("%d ", buffer[index]);
+    }
+    printf("]\n");
+    printf(" Status: %d/%d slots used.\n", count, size);
+}
+
+void produce(int item) {
+    if (count >= size) {
+        printf("\nError: Buffer is full! Cannot add %d.\n", item);
+        return;
+    }
+    buffer[in] = item;
+    in = (in + 1) % size;
+    count++;
+    printf("\nSuccess: Produced %d\n", item);
+}
+
+void consume() {
+    if (count <= 0) {
+        printf("\nError: Buffer is empty! Nothing to consume.\n");
+        return;
+    }
+    int item = buffer[out];
+    out = (out + 1) % size;
+    count--;
+    printf("\nSuccess: Consumed %d\n", item);
+}
+
+int main() {
+    int choice, item;
+
+    while (1) {
+        printf("\n--- Producer-Consumer Menu ---");
+        printf("\n1. Produce Item");
+        printf("\n2. Consume Item");
+        printf("\n3. Display Buffer");
+        printf("\n4. Exit");
+        printf("\nEnter your choice: ");
+        
+        if (scanf("%d", &choice) != 1) break;
+
+        switch (choice) {
+            case 1:
+                printf("Enter item value: ");
+                scanf("%d", &item);
+                produce(item);
+                break;
+            case 2:
+                consume();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                printf("Program Exited.\n");
+                exit(0);
+            default:
+                printf("Invalid option. Try again.\n");
+        }
+    }
+    return 0;
+}
