@@ -1,0 +1,25 @@
+Find frame lru_index with minimum time[] value (least recently used).
+Replace frame[lru_index] = ref[i].
+Update time[lru_index] = ++t.
+Increment page fault count.
+Step 3: Optimal (OPT)
+
+Objective: Replace the page that will not be used for the longest time in the future.
+
+Algorithm:
+
+Initialize frame[] with -1.
+For each page ref[i]:
+Check if ref[i] is in frame[].
+If yes → no page fault.
+If no → page fault occurs:
+For each frame, look ahead in ref[i+1] ... ref[n-1]:
+Find the frame whose page appears farthest in the future or does not appear at all.
+Replace that frame with ref[i].
+Increment page fault count.
+Step 4: Display
+Print the generated reference string.
+Print the page faults for each algorithm:
+FIFO
+LRU
+Optimal
