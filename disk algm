@@ -1,0 +1,93 @@
+1. Main Control Algorithm
+
+    Initialize a global array req[] to store track requests and a variable head for the starting position.
+
+    Input Phase:
+
+        Accept the number of requests n.
+
+        Accept the sequence of tracks (requests).
+
+        Accept the initial disk head position.
+
+    Menu Loop:
+
+        Display a menu with options: SSTF, LOOK, C-SCAN, and Exit.
+
+        Based on the user's choice, execute the corresponding function.
+
+        Repeat until the user selects "Exit".
+
+2. SSTF (Shortest Seek Time First) Algorithm
+
+This algorithm services the request closest to the current head position.
+
+    Create a visited[] array of size n, initialized to 0.
+
+    Set the current position pos = head.
+
+    For i from 1 to n:
+
+        Initialize min_distance = 9999 and index = -1.
+
+        For each request j in the array:
+
+            If visited[j] is 0 (not serviced):
+
+                Calculate distance=∣pos−req[j]∣.
+
+                If distance<min_distance, update min_distance and store the current index j.
+
+        Mark the request at index as serviced (visited[index] = 1).
+
+        Add the min_distance to the total_seek_time.
+
+        Move the head to the request track: pos = req[index].
+
+        Print the current pos as part of the sequence.
+
+3. LOOK Algorithm (Direction: Right/Increasing)
+
+This algorithm moves the head in one direction until the last request in that direction is met, then reverses.
+
+    Split the requests into two lists:
+
+        right[]: tracks ≥ head.
+
+        left[]: tracks < head.
+
+    Sort both lists in ascending order.
+
+    Service Right: Traverse the right[] list from the first element to the last.
+
+        Calculate distance from current pos, add to total_seek_time, and update pos.
+
+    Service Left: Traverse the left[] list in reverse (from the largest track to the smallest).
+
+        Calculate distance from current pos, add to total_seek_time, and update pos.
+
+    Display the total seek time.
+
+4. C-SCAN (Circular SCAN) Algorithm
+
+This algorithm moves the head from the current position to one end of the disk, then jumps immediately to the other end.
+
+    Split requests into left[] and right[] based on the head.
+
+    Sort both lists in ascending order.
+
+    Service Right: Traverse the right[] list from first to last, updating total_seek_time and pos.
+
+    The Circular Jump:
+
+        Move head from the last serviced request to the end of the disk (track 199).
+
+        Move head from the end of the disk (199) directly to the start of the disk (track 0).
+
+        Add both movement distances to total_seek_time.
+
+    Service Left: Traverse the left[] list from the first (smallest) element to the last (largest).
+
+        Update total_seek_time and pos.
+
+    Display the total seek time.
