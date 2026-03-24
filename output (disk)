@@ -1,0 +1,44 @@
+Enter number of requests: 5
+Enter request sequence:
+98 183 41 122 14
+Enter initial head position: 50
+
+--- Disk Scheduling ---
+1. SSTF
+2. LOOK
+3. C-SCAN
+4. Exit
+Enter choice: 1
+
+Seek Sequence: 50 -> 41 -> 14 -> 98 -> 122 -> 183
+Total Seek Time = 205
+
+--- Disk Scheduling ---
+1. SSTF
+2. LOOK
+3. C-SCAN
+4. Exit
+Enter choice: 2
+
+Seek Sequence: 50 -> 98 -> 122 -> 183 -> 41 -> 14
+Total Seek Time = 302
+
+--- Disk Scheduling ---
+1. SSTF
+2. LOOK
+3. C-SCAN
+4. Exit
+Enter choice: 3
+
+Seek Sequence: 50 -> 98 -> 122 -> 183 -> 0 -> 14 -> 41
+Total Seek Time = 389
+
+--- Disk Scheduling ---
+1. SSTF
+2. LOOK
+3. C-SCAN
+4. Exit
+Enter choice: 4
+
+
+=== Code Execution Successful ===
